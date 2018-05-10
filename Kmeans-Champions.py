@@ -1,5 +1,4 @@
 import pandas as pd
-import csv
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 # Read dataset
@@ -13,15 +12,10 @@ match = match_mid[1:]
 match = match.fillna(0)
 # Replace YES wit 1
 match = match.replace('YES',1)
-print match.head()
 # Retrieve part of the values
 Kmeans_values = match.iloc[:,1:66].values
-print Kmeans_values
-print match.values
 # Convert numpy.array to list
 a = match.values.tolist()
-print a
-print type(a)
 
 # look for number of clusters
 wcss = []
@@ -30,10 +24,12 @@ for i in range(1, 11):
     kmeans.fit(Kmeans_values)
     wcss.append(kmeans.inertia_)
 print wcss
+
+# visulization
 plt.plot(range(1, 11), wcss)
 plt.title('The elbow method')
 plt.xlabel('Number of clusters')
-plt.ylabel('WCSS') #within cluster sum of squares
+plt.ylabel('WCSS')
 plt.show()
 
 # Build Model
